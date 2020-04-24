@@ -3,17 +3,27 @@
 *,
 ::before,
 ::after {
+	margin: 0;
 	box-sizing: border-box;
 }
 
 body {
 	margin: 0 auto;
 	font-family: "Space Mono", monospace;
+	background-color: #000;
 }
 
 .container {
+	width: 80%;
+	max-width: 750px;
+	margin: 0 auto;
 	align-items: center;
 	justify-content: center;
 }
 
+// <!-- Components  -->
 @import "./components/button.scss";
+@import "./components/card.scss";
+
+// <!-- Utils  -->
+@import "./utils/flex.scss";

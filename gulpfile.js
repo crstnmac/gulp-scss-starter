@@ -1,4 +1,4 @@
-var gulp = require("gulp"),
+const gulp = require("gulp"),
 	autoprefixer = require("gulp-autoprefixer"),
 	browserSync = require("browser-sync").create(),
 	sass = require("gulp-sass"),
@@ -7,13 +7,13 @@ var gulp = require("gulp"),
 	concat = require("gulp-concat"),
 	lineec = require("gulp-line-ending-corrector");
 
-var root = "./",
+const root = "./",
 	scss = root + "styles/scss/",
 	cssFolder = root + "styles/css/";
 
-var styleWatchFiles = root + "styles/scss/**/*.scss";
+const styleWatchFiles = root + "styles/scss/**/*.scss";
 
-var cssSRC = root + "styles/css/main.css";
+const cssSRC = root + "styles/css/main.css";
 
 function css() {
 	return gulp
@@ -21,6 +21,7 @@ function css() {
 		.pipe(sourcemaps.init({ loadMaps: true }))
 		.pipe(
 			sass({
+				errLogToConsole: true,
 				outputStyle: "expanded",
 			}).on("error", sass.logError)
 		)
