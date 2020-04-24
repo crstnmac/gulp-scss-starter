@@ -1,0 +1,49 @@
+.button {
+	display: block;
+	font-weight: 600;
+	font-size: 1rem;
+	text-transform: uppercase;
+	padding: 0.7em 1.5em 0.7em 1.5em;
+	border: none;
+	margin: 1rem;
+	border-width: 0px;
+	border-radius: 15px;
+	transition: ease-in-out 0.3s;
+	&:focus {
+		border-width: 3px;
+		outline: none;
+	}
+
+	&:hover {
+		border-width: 3px;
+		cursor: pointer;
+	}
+}
+
+.button.primary {
+	background: rgba(0, 123, 255, 0.15);
+	color: rgba(0, 123, 255, 0.8);
+
+	&:hover {
+		transition: ease-in-out 0.3s;
+		background: rgba(0, 123, 255, 0.3);
+	}
+
+	&:active {
+		background: rgba(0, 123, 255, 0.5);
+	}
+}
+
+.button.secondary {
+	background: rgba(255, 154, 53, 0.15);
+	color: rgba(255, 154, 53, 0.8);
+
+	&:hover {
+		transition: ease-in-out 0.3s;
+		background: rgba(255, 154, 53, 0.3);
+	}
+
+	&:active {
+		background: rgba(255, 154, 53, 0.5);
+	}
+}
