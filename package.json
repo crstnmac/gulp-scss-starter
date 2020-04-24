@@ -1,7 +1,7 @@
 {
-  "name": "succotash",
+  "name": "@crstnmac/gulpscss",
   "version": "1.0.0",
-  "description": "A css library",
+  "description": "A gulpscss starter ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
   "keywords": [
     "CSS"
   ],
-  "author": "Cris",
+  "author": "Criston Mascarenhas",
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.26.7",
