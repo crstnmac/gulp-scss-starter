@@ -1,27 +1,44 @@
-const gulp = require("gulp");
-const sass = require("gulp-sass");
-const browserSync = require("browser-sync").create();
-const rename = require("gulp-rename");
+var gulp = require("gulp"),
+	autoprefixer = require("gulp-autoprefixer"),
+	browserSync = require("browser-sync").create(),
+	sass = require("gulp-sass"),
+	cleanCSS = require("gulp-clean-css"),
+	sourcemaps = require("gulp-sourcemaps"),
+	concat = require("gulp-concat"),
+	lineec = require("gulp-line-ending-corrector");
 
-//complie scss into css
-function style() {
-	// 1 . Where is my scss file
-	return (
-		gulp
-			.src("./styles/scss/**/*.scss")
-			// 2. passs that file through sass compiler
-			.pipe(
-				sass({
-					errLogToConsole: true,
-					outputStyle: "compressed",
-				}).on("error", sass.logError)
-			)
-			.pipe(rename({ suffix: ".min" }))
-			// 3. where do I save the compiled css?
-			.pipe(gulp.dest("./styles/css"))
-			// 4. stream changes to all browser
-			.pipe(browserSync.stream())
-	);
+var root = "./",
+	scss = root + "styles/scss/",
+	cssFolder = root + "styles/css/";
+
+var styleWatchFiles = root + "styles/scss/**/*.scss";
+
+var cssSRC = root + "styles/css/main.css";
+
+function css() {
+	return gulp
+		.src([scss + "main.scss"])
+		.pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(
+			sass({
+				outputStyle: "expanded",
+			}).on("error", sass.logError)
+		)
+		.pipe(autoprefixer("last 2 versions"))
+		.pipe(sourcemaps.write())
+		.pipe(lineec())
+		.pipe(gulp.dest(cssFolder));
+}
+
+function concatCSS() {
+	return gulp
+		.src(cssSRC)
+		.pipe(sourcemaps.init({ loadMaps: true, largeFile: true }))
+		.pipe(concat("main.min.css"))
+		.pipe(cleanCSS())
+		.pipe(sourcemaps.write("./maps/"))
+		.pipe(lineec())
+		.pipe(gulp.dest(cssFolder));
 }
 
 function watch() {
@@ -30,10 +47,14 @@ function watch() {
 			baseDir: "./",
 		},
 	});
-	gulp.watch("./styles/scss/**/*.scss", style);
+	gulp.watch(styleWatchFiles, gulp.series([css, concatCSS]));
 	gulp.watch("./*.html").on("change", browserSync.reload);
 	gulp.watch("./js/**/*.js").on("change", browserSync.reload);
 }
 
-exports.style = style;
+exports.css = css;
+exports.concatCSS = concatCSS;
 exports.watch = watch;
+
+var build = gulp.parallel(watch);
+gulp.task("default", build);
