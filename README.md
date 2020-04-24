@@ -2,7 +2,7 @@
 
 #### To use this starter:
 
-    git clone https://github.com/crstnmac/gulp-scss-starter.git <project-name> && cd <project-name> && npm install
+    git clone https://github.com/crstnmac/gulp-scss-starter.git && cd gulp-scss-starter && npm install
 
 #### To run the server:
 
